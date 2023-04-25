@@ -1,0 +1,18 @@
+.myBtn {
+    background: $darkPurple;
+    border-radius: 4px;
+    color: white !important;
+    &:hover {
+        background: $hoverPurple;
+    }
+}
+
+.myBtn-outline {
+    @extend .myBtn;
+    background-color: lighten($darkPurple, 50%);
+    border: solid 2px $darkPurple;
+    color: $darkPurple !important;
+    &:hover {
+        background: lighten($darkPurple, 45%);
+    }
+}

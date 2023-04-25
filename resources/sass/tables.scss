@@ -1,0 +1,50 @@
+.fixed-table-container {
+    max-height: 80vh;
+    overflow: auto;
+}
+
+.fixed-table-container-sm {
+    @extend .fixed-table-container;
+    max-height: 60vh;
+}
+
+.table-header {
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+thead {
+    background: $lightPurple;
+    width: 100%;
+}
+
+.sticky-head {
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 10px;
+}
+
+.tableBtn {
+    width: 45%;
+    @media (max-width: 600px) {
+        width: 75%;
+    }
+}
+
+.close {
+    all: unset;
+    text-align: right;
+    font-size: larger;
+    &:hover {
+        cursor: pointer;
+    }
+}
+table,
+.tableBtn {
+    @media (max-width: 600px) {
+        font-size: smaller;
+    }
+}

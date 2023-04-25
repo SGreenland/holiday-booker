@@ -1,0 +1,47 @@
+.mainNav {
+    background: $darkPurple;
+    color: $lightPurple;
+    margin-bottom: 1rem;
+    height: 10%;
+}
+
+i.fa-bars {
+    font-size: larger;
+    &:hover {
+        color: $mediumPurple;
+        cursor: pointer;
+    }
+    z-index: -1;
+}
+
+.offcanvas {
+    color: $darkPurple;
+}
+.navLink {
+    all: unset;
+    color: $darkPurple;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.navItem:hover,
+a.navLink {
+    color: $hoverPurple;
+}
+
+.navLink:hover::after {
+    transform: scale(1, 1);
+}
+
+.navLink::after {
+    content: "\00a0\00a0";
+    display: inline-block;
+    border-right: 3px solid $darkPurple;
+    transform: scale(0, 0);
+    transition: 500ms transform;
+}
+
+.barsBtn {
+    all: unset;
+    padding: 1rem;
+}
