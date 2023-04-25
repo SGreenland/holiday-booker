@@ -67,6 +67,7 @@ export default {
         return {
             options: {
                 labels: ['Holiday Taken', 'Holiday Remaining'],
+                colors: ['#483248', '#AA98A9'],
                 dataLabels: {
                     enabled: true,
                     formatter: function(val, opts) {

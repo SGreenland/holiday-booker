@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="container-fluid d-flex m-auto">
+    <div class="container-fluid d-flex flex-wrap m-auto">
         <custom-alert
             v-if="displayAlert"
             :action="alertAction"
@@ -9,7 +9,7 @@
         >
         </custom-alert>
 
-        <div class="col col-lg-5 col-sm-12 m-auto fixed-table-container">
+        <div class="col-12 col-lg-5 col-sm-12 m-auto fixed-table-container">
             <h2 class="text-center mb-3">Holiday Requests</h2>
             <table class="w-100">
                 <thead scope="row" class="sticky-head">
@@ -44,7 +44,7 @@
                 </tr>
             </table>
         </div>
-         <div class="col col-lg-5 col-sm-12 m-auto fixed-table-container">
+         <div class="col-12 col-lg-5 col-sm-12 m-auto fixed-table-container">
             <h2 class="text-center mb-3">Cancellation Requests</h2>
             <table class="w-100">
                 <thead scope="row" class="sticky-head">
