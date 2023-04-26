@@ -17,9 +17,8 @@ class CancellationRequestController extends Controller
 
             $user = Auth::user();
 
-            Log::debug($user);
 
-            if(CancellationRequest::where('holiday_id', $request->holidayId)->get()){
+            if(CancellationRequest::where('holiday_id', $request->holidayId)->exists()){
                 return response()->json('You have already sent a request to cancel this holiday.', 400);
             }
             else {

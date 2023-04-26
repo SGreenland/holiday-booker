@@ -68,7 +68,7 @@ class HolidayPolicy
     public function delete(User $user, Holiday $holiday)
     {
         //
-        return $holiday->user_id === $user->id;
+        return $holiday->user_id === $user->id || $user->roles()->get()->contains('name', 'admin');
     }
 
     /**
@@ -93,6 +93,6 @@ class HolidayPolicy
     public function forceDelete(User $user, Holiday $holiday)
     {
         //
-        return $holiday->user_id === $user->id;
+        return $holiday->user_id === $user->id || $user->roles()->get()->contains('name', 'admin');
     }
 }

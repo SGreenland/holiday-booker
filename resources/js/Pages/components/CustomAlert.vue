@@ -1,6 +1,6 @@
 <template lang="">
     <div class="modalOverlay">
-        <div class="container-fluid col m-auto myModal shadow-lg rounded">
+        <div class="container-fluid col-10 col-lg-4 col-sm-8 m-auto myModal shadow-lg rounded-3">
             <div
                 class="d-flex flex-column text-center h-100 justify-content-evenly"
             >

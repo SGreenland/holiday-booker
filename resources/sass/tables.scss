@@ -6,6 +6,7 @@
 .fixed-table-container-sm {
     @extend .fixed-table-container;
     max-height: 60vh;
+    min-height: 200px;
 }
 
 .table-header {

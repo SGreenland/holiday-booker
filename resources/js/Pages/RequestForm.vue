@@ -43,16 +43,10 @@ export default {
         };
     },
 
-    mounted() {
-         this.$nextTick(() => {
-            console.log(document.getElementById('start_date'))
-        })
-    },
-
     methods: {
         submit() {
             axios.post("/holiday", this.form).then(() => {
-                    this.$inertia.get('/holiday');
+                    this.$inertia.get('/');
             }).catch(error => {
                 this.displayAlert = true;
                 this.alertMessage = error.response.data.message;

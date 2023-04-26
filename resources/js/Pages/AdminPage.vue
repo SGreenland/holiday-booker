@@ -1,5 +1,8 @@
 <template lang="">
     <div class="container-fluid d-flex flex-wrap m-auto">
+        <div class="w-100 text-center">
+            <h2>Admin</h2>
+        </div>
         <custom-alert
             v-if="displayAlert"
             :action="alertAction"
@@ -9,7 +12,8 @@
         >
         </custom-alert>
 
-        <div class="col-12 col-lg-5 col-sm-12 m-auto fixed-table-container">
+        <div class="col-xl-6 col-lg-10 col-md-12 col-sm-12 mx-auto p-2">
+            <div class="fixed-table-container card p-3 rounded-3 shadow-lg">
             <h2 class="text-center mb-3">Holiday Requests</h2>
             <table class="w-100">
                 <thead scope="row" class="sticky-head">
@@ -36,15 +40,17 @@
                         ><button
                             class="btn btn-secondary m-1 tableBtn"
                             id="reject-btn"
-                            @click="confirmRejection(request.id)"
+                            @click="confirmRejection(request.id, 'request')"
                         >
                             Reject
                         </button>
                     </td>
                 </tr>
             </table>
+            </div>
         </div>
-         <div class="col-12 col-lg-5 col-sm-12 m-auto fixed-table-container">
+         <div class="col-xl-6 col-lg-10 col-sm-12 mx-auto p-2">
+            <div class="fixed-table-container card p-3 rounded-3 shadow-lg h-100">
             <h2 class="text-center mb-3">Cancellation Requests</h2>
             <table class="w-100">
                 <thead scope="row" class="sticky-head">
@@ -64,20 +70,21 @@
                         <button
                             class="btn btn-info m-1 tableBtn"
                             id="approve-btn"
-                            @click="approveHoliday(request.id)"
+                            @click="approveCancellation(request.id)"
                             data-bs-target="#exampleModalCenter"
                         >
                             Approve</button
                         ><button
                             class="btn btn-secondary m-1 tableBtn"
                             id="reject-btn"
-                            @click="confirmRejection(request.id)"
+                            @click="rejectCancellation(request.id)"
                         >
                             Reject
                         </button>
                     </td>
                 </tr>
             </table>
+            </div>
         </div>
     </div>
 </template>
@@ -135,6 +142,27 @@ export default {
                     }
                 });
         },
+        approveCancellation(id) {
+            axios.delete(`/holiday/${id}`).then(() => {
+                this.displayAlert = true;
+                this.alertMessage = 'Cancellation approved.';
+                this.$inertia.reload({only: ['cancellationRequests']});
+            }
+            ).catch(() => {
+                this.displayAlert = true;
+                this.alertMessage = 'Sorry an error occurred, please try again later.';
+            })
+        },
+        rejectCancellation(id){
+            axios.post('/holiday/reject-cancellation', {holidayId: id}).then(() => {
+                this.displayAlert = true;
+                this.alertMessage = 'Cancellation request declined.';
+                this.$inertia.reload({only: ['cancellationRequests']});
+            }).catch(() => {
+                this.displayAlert = true;
+                this.alertMessage = 'Sorry an error occurred, please try again later.';
+            })
+        }
     },
 };
 </script>

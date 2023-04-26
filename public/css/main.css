@@ -14312,25 +14312,33 @@ textarea.form-control-lg {
 
 .myBtn, .myBtn-outline {
   background: #663577;
-  border-radius: 4px;
+  border-radius: 5px;
+  border: 2px solid #663577;
   color: white !important;
 }
 .myBtn:hover, .myBtn-outline:hover {
-  background: #562168;
+  background: #451655;
 }
 
 .myBtn-outline {
-  background-color: #ddc6e5;
+  background-color: gainsboro;
   border: solid 2px #663577;
   color: #663577 !important;
 }
 .myBtn-outline:hover {
-  background: #d3b4de;
+  background: #cfcfcf;
+}
+
+.b-dropdown > .btn-secondary {
+  all: unset !important;
+}
+.b-dropdown > .btn-secondary:hover {
+  cursor: pointer !important;
 }
 
 .mainNav {
   background: #663577;
-  color: #ecdff0;
+  color: whitesmoke;
   margin-bottom: 1rem;
   height: 10%;
 }
@@ -14340,7 +14348,7 @@ i.fa-bars {
   z-index: -1;
 }
 i.fa-bars:hover {
-  color: #ae86bb;
+  color: #b49fbb;
   cursor: pointer;
 }
 
@@ -14357,7 +14365,7 @@ i.fa-bars:hover {
 
 .navItem:hover,
 a.navLink {
-  color: #562168;
+  color: #451655;
 }
 
 .navLink:hover::after {
@@ -14377,6 +14385,11 @@ a.navLink {
   padding: 1rem;
 }
 
+.center-content {
+  place-content: center;
+  place-items: center;
+}
+
 .vc-weeks {
   row-gap: 1.5rem;
 }
@@ -14393,14 +14406,9 @@ select {
 }
 
 .myModal {
-  position: absolute;
-  left: 0;
-  right: 0;
-  background: #ecdff0;
-  height: 150px;
+  background: whitesmoke;
+  height: 180px;
   padding: 1rem;
-  max-width: 30vw;
-  min-width: 300px;
 }
 
 .modalOverlay {
@@ -14411,6 +14419,8 @@ select {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  place-content: center;
 }
 
 .fixed-table-container, .fixed-table-container-sm {
@@ -14420,6 +14430,7 @@ select {
 
 .fixed-table-container-sm {
   max-height: 60vh;
+  min-height: 200px;
 }
 
 .table-header {
@@ -14428,7 +14439,7 @@ select {
 }
 
 thead {
-  background: #ecdff0;
+  background: #b49fbb;
   width: 100%;
 }
 

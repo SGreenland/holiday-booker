@@ -1,6 +1,6 @@
 .mainNav {
     background: $darkPurple;
-    color: $lightPurple;
+    color: whitesmoke;
     margin-bottom: 1rem;
     height: 10%;
 }
@@ -8,7 +8,7 @@
 i.fa-bars {
     font-size: larger;
     &:hover {
-        color: $mediumPurple;
+        color: $lightPurple;
         cursor: pointer;
     }
     z-index: -1;
@@ -44,4 +44,9 @@ a.navLink {
 .barsBtn {
     all: unset;
     padding: 1rem;
+}
+
+.center-content {
+    place-content: center;
+    place-items: center;
 }

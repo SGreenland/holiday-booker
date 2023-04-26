@@ -8,53 +8,76 @@
             @confirmedDelete="deleteRequest"
         ></custom-alert>
         <div class="row mb-4">
-            <h2 class="col text-center">My Holiday</h2>
+            <h2 class="col text-center">Dashboard</h2>
         </div>
         <div class="row col-12 m-auto">
             <div
-                class="col-12 col-lg-6 col-sm-10 p-4 d-flex justify-content-evenly align-items-center"
+                class="col-12 col-lg-6 col-sm-12 p-3 d-flex"
             >
-               <apexchart :key="donutKey" width="380" type="donut" :options="options" :series="series"></apexchart>
+                <div class="card rounded-3 shadow-lg p-3 w-100 h-100">
+                    <h5 class="w-100 text-center">My Allowance</h5>
+               <div class="d-flex h-100 center-content">
+                   <apexchart :key="donutKey" width="380" type="donut" :options="options" :series="series"></apexchart>
+               </div>
+               </div>
             </div>
-            <div class="col col-lg-6 col-sm-12 m-auto">
-                <h5 class="w-100 text-center">My Requests</h5>
-                <div class="fixed-table-container-sm">
-                    <table class="w-100">
-                        <thead scope="row" class="sticky-head">
-                            <th class="table-header">Start Date</th>
-                            <th class="table-header">End Date</th>
-                            <th class="table-header">Total Days</th>
-                            <th class="table-header">Status</th>
-                            <th class="table-header text-center">Actions</th>
-                        </thead>
-                        <td colspan="5" v-if="!userHoliday.length" class="w-100 text-center"> You haven't requested any holiday yet.</td>
-                        <tr
-                            v-for="request in userHoliday"
-                        >
-                            <td>{{ request.start_date }}</td>
-                            <td>{{ request.end_date }}</td>
-                            <td>{{ request.total_days }}</td>
-                            <td>{{ request.status }}</td>
-                            <td class="text-center">
-                                <button
-                                    v-if="request.status == 'pending' || request.status == 'declined'"
-                                    class="btn btn-secondary m-1 tableBtn w-75"
-                                    id="reject-btn"
-                                    @click="confirmDelete(request.id)"
-                                >
-                                    Delete
-                                </button>
-                                <button
-                                    v-else
-                                    class="btn btn-outline-danger m-1 tableBtn w-75"
-                                    id="reject-btn"
-                                    @click="cancelHoliday(request.id)"
-                                >
-                                    Cancel
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
+            <div class="col col-lg-6 col-sm-12 m-auto p-3">
+                <div class="card rounded-3 shadow-lg p-3">
+                    <h5 class="w-100 text-center">My Requests</h5>
+                    <div class="fixed-table-container-sm">
+                        <table class="w-100">
+                            <thead scope="row" class="sticky-head">
+                                <th class="table-header">Start Date</th>
+                                <th class="table-header">End Date</th>
+                                <th class="table-header">Total Days</th>
+                                <th class="table-header">
+                                    <b-dropdown text="Status">
+                                        <b-dropdown-form>
+                                            <b>Filter:</b>
+                                            <b-form-checkbox v-model="filter[0].pending">
+                                                Pending
+                                            </b-form-checkbox>
+                                             <b-form-checkbox v-model="filter[1].approved">
+                                                Approved
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="filter[2].declined">
+                                                Declined
+                                            </b-form-checkbox>
+                                        </b-dropdown-form>
+                                    </b-dropdown>
+                                </th>
+                                <th class="table-header text-center">Actions</th>
+                            </thead>
+                            <td colspan="5" v-if="!userHoliday.length" class="w-100 text-center"> You haven't requested any holiday yet.</td>
+                            <tr
+                                v-for="request in getFilteredHoliday"
+                                :ref="request.status"
+                            >
+                                <td>{{ request.start_date }}</td>
+                                <td>{{ request.end_date }}</td>
+                                <td>{{ request.total_days }}</td>
+                                <td>{{ request.status }}</td>
+                                <td class="text-center">
+                                    <button
+                                        v-if="request.status == 'pending' || request.status == 'declined'"
+                                        class="btn btn-outline-danger m-1 tableBtn w-75"
+                                        id="reject-btn"
+                                        @click="confirmDelete(request.id)"
+                                    >
+                                        <b-icon icon="trash"></b-icon>
+                                    </button>
+                                    <button
+                                        v-else
+                                        class="btn btn-secondary m-1 tableBtn w-75"
+                                        id="reject-btn"
+                                        @click="cancelHoliday(request.id)"
+                                    >
+                                        <b-icon icon="trash"></b-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,26 +90,34 @@ export default {
         return {
             options: {
                 labels: ['Holiday Taken', 'Holiday Remaining'],
-                colors: ['#483248', '#AA98A9'],
+                colors: ['#663577', '#b29bb9'],
                 dataLabels: {
                     enabled: true,
                     formatter: function(val, opts) {
-                     return opts.w.config.series[opts.seriesIndex]
+                     return opts.w.config.series[opts.seriesIndex] + ' days'
 
-                    }}
+                    },
+                    }
                 },
             series: [this.totalDaysTaken, 30 - this.totalDaysTaken],
             pending: null,
             approved: null,
             rejected: null,
-            doughnutColor: null,
             selectedRequestId: null,
             displayAlert: null,
             alertMessage: null,
             alertAction: null,
             donutKey: 0,
+            filter: [{pending: true}, {approved: true}, {declined: true}],
+            filteredHoliday: null,
 
         };
+    },
+    computed: {
+        getFilteredHoliday() {
+            if(!this.filteredHoliday) return this.userHoliday;
+            else return this.filteredHoliday;
+        }
     },
     methods: {
         confirmDelete(id) {
@@ -99,7 +130,6 @@ export default {
             axios
                 .delete(`/holiday/${this.selectedRequestId}`)
                 .then((response) => {
-                    console.log(response)
                     this.alertMessage = "Request Deleted"
                     this.alertAction = null;
                     this.$inertia.reload({ only: ["userHoliday", "totalDaysTaken"] });
@@ -123,7 +153,32 @@ export default {
         totalDaysTaken() {
             this.series = [this.totalDaysTaken, 30 - this.totalDaysTaken];
             this.donutKey += 1;
+        },
+
+       filter: {
+        deep: true,
+        handler() {
+            if(this.filter.every((obj) => obj[Object.keys(obj)])){
+                this.filteredHoliday = null;
+            }
+            else {
+                this.filteredHoliday = this.userHoliday;
+                 this.filter.forEach(filter => {
+                if(filter.pending == false){
+                    this.filteredHoliday = this.filteredHoliday.filter(hol => hol.status != 'pending')
+                }
+                if(filter.approved == false){
+                    this.filteredHoliday = this.filteredHoliday.filter(hol => hol.status != 'approved')
+
+                }
+                if(filter.declined == false){
+                    this.filteredHoliday = this.filteredHoliday.filter(hol => hol.status != 'declined')
+                }
+            })
+            }
+
         }
+       }
     }
 };
 </script>

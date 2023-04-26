@@ -1,6 +1,7 @@
 .myBtn {
     background: $darkPurple;
-    border-radius: 4px;
+    border-radius: 5px;
+    border: 2px solid $darkPurple;
     color: white !important;
     &:hover {
         background: $hoverPurple;
@@ -9,10 +10,18 @@
 
 .myBtn-outline {
     @extend .myBtn;
-    background-color: lighten($darkPurple, 50%);
+    background-color: gainsboro;
     border: solid 2px $darkPurple;
     color: $darkPurple !important;
     &:hover {
-        background: lighten($darkPurple, 45%);
+        background: darken(gainsboro, 5%);
     }
+}
+
+.b-dropdown > .btn-secondary {
+    all: unset !important;
+     &:hover {
+        cursor: pointer !important;
+     }
+
 }

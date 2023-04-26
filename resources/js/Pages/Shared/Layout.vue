@@ -39,6 +39,17 @@
                     </div>
                     <div class="offcanvas-body">
                          <div class="mb-5 navItem">
+                            <i class="fa fa-home"></i>
+                             <inertia-link
+                                class="navLink"
+                                data-bs-dismiss="offcanvas"
+                                type="button"
+                                as="button"
+                                href="/"
+                                >Home</inertia-link
+                            >
+                        </div>
+                         <div class="mb-5 navItem">
                             <i class="fa fa-user"></i>
                              <inertia-link
                                 class="navLink"

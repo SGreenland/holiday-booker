@@ -42,8 +42,7 @@ export default {
       },
       calendarKey: 1,
       myColor: 'pink',
-      colorOptions: ['pink', 'green', 'blue', 'red', 'yellow', 'orange', 'teal', 'purple'],
-      currentColors: [],
+      colorOptions: ['pink', 'green', 'blue',  'yellow', 'orange', 'teal', 'purple'],
     };
   },
 
@@ -53,16 +52,11 @@ export default {
     if(localStorage.getItem('myColor')){
         this.myColor = localStorage.getItem('myColor');
     }
-    this.currentColors = this.attrs.map(x => x.highlight.color);
   },
   methods: {
     setCalendar() {
 
-      this.holidays.forEach((holiday, index) => {
-        let currentColor;
-        if(this.currentColors.length){
-            currentColor = this.currentColors[index];
-        }
+      this.holidays.forEach((holiday) => {
         this.attrs.push({
           key: holiday.name,
           dates: [
@@ -73,7 +67,7 @@ export default {
           ],
           excludeDates: { weekends: [0, 6] },
           highlight: {
-            color: this.getColor(holiday.user_id, currentColor),
+            color: this.getColor(holiday.user_id),
             ...(holiday.status === "declined" && { color: "gray" }),
             ...(holiday.status === "pending" && {
               fillMode: "light",
@@ -112,13 +106,11 @@ export default {
       });
     },
 
-    getColor(userId, currentColor) {
-        console.log(currentColor);
+    getColor(userId) {
         if(this.$page.props.auth.user.id == userId){
             return this.checkSavedColor();
         }
-        else if(currentColor) return currentColor;
-        else return this.colorOptions.filter(color => color != this.myColor)[Math.floor(Math.random() * this.colorOptions.length)]
+        else return this.colorOptions[userId]
     },
 
     checkSavedColor() {
