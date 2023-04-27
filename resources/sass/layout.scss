@@ -1,8 +1,18 @@
+body {
+    background-color: aliceblue !important;
+}
+
+.offcanvas-header {
+    height: 75px;
+    background-color: $mediumBlue;
+}
+
+
 .mainNav {
     background: $darkPurple;
     color: whitesmoke;
     margin-bottom: 1rem;
-    height: 10%;
+    height: 75px;
 }
 
 i.fa-bars {
@@ -16,7 +26,9 @@ i.fa-bars {
 
 .offcanvas {
     color: $darkPurple;
+    width: 200px !important;
 }
+
 .navLink {
     all: unset;
     color: $darkPurple;

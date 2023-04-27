@@ -8,7 +8,8 @@
                     ><h2 class="">Holiday Booker</h2></a
                 >
             </div>
-            <div class="navLinks p-4 d-flex align-items-center">
+            <!-- side bar nav -->
+            <div v-if="path != 'login' && path != 'register'" class="navLinks p-4 d-flex align-items-center">
                 <button
                     class="barsBtn"
                     type="button"
@@ -18,9 +19,9 @@
                 >
                     <i class="fa fa-bars"> </i>
                 </button>
-                <!-- side bar nav -->
                 <div
                     class="offcanvas offcanvas-end"
+                    ref="offcanvas"
                     tabindex="-1"
                     id="offcanvasRight"
                     aria-labelledby="offcanvasRightLabel"
@@ -134,9 +135,15 @@ export default {
             if(this.user){
                 return this.$page.props.auth.user.roles.filter(role => role.id == 1).length
             }
-
+        },
+        path() {
+            return this.$page.props.pathname;
         }
     },
+    mounted() {
+        console.log(this.path);
+    },
+
     methods: {
         goToRoute() {
             if (!this.user) {

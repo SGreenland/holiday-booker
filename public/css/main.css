@@ -14314,6 +14314,7 @@ textarea.form-control-lg {
   background: #663577;
   border-radius: 5px;
   border: 2px solid #663577;
+  padding: 4px;
   color: white !important;
 }
 .myBtn:hover, .myBtn-outline:hover {
@@ -14321,12 +14322,12 @@ textarea.form-control-lg {
 }
 
 .myBtn-outline {
-  background-color: gainsboro;
+  background-color: #afc5d0;
   border: solid 2px #663577;
   color: #663577 !important;
 }
 .myBtn-outline:hover {
-  background: #cfcfcf;
+  background: #9fb9c6;
 }
 
 .b-dropdown > .btn-secondary {
@@ -14336,11 +14337,20 @@ textarea.form-control-lg {
   cursor: pointer !important;
 }
 
+body {
+  background-color: aliceblue !important;
+}
+
+.offcanvas-header {
+  height: 75px;
+  background-color: #afc5d0;
+}
+
 .mainNav {
   background: #663577;
   color: whitesmoke;
   margin-bottom: 1rem;
-  height: 10%;
+  height: 75px;
 }
 
 i.fa-bars {
@@ -14354,6 +14364,7 @@ i.fa-bars:hover {
 
 .offcanvas {
   color: #663577;
+  width: 200px !important;
 }
 
 .navLink {

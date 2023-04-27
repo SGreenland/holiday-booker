@@ -43,6 +43,7 @@ class HandleInertiaRequests extends Middleware
                 ? $request->user()->only('name', 'id', 'email', 'roles')
 
                 : null,
+            'pathname' => $request->route()->uri(),
         ]);
     }
 }

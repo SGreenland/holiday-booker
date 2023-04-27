@@ -4,15 +4,15 @@
             v-if="displayAlert"
             :message="alertMessage"
             :action="alertAction"
-            @close="displayAlert = false"
+            @close="displayAlert = false, alertAction=false"
             @confirmedDelete="deleteRequest"
         ></custom-alert>
-        <div class="row mb-4">
-            <h2 class="col text-center">Dashboard</h2>
+        <div class="w-100 text-center">
+            <h2>Dashboard</h2>
         </div>
         <div class="row col-12 m-auto">
             <div
-                class="col-12 col-lg-6 col-sm-12 p-3 d-flex"
+                class="col-12 col-lg-6 col-sm-12 p-2 d-flex"
             >
                 <div class="card rounded-3 shadow-lg p-3 w-100 h-100">
                     <h5 class="w-100 text-center">My Allowance</h5>
@@ -21,7 +21,7 @@
                </div>
                </div>
             </div>
-            <div class="col col-lg-6 col-sm-12 m-auto p-3">
+            <div class="col col-lg-6 col-sm-12 m-auto p-2">
                 <div class="card rounded-3 shadow-lg p-3">
                     <h5 class="w-100 text-center">My Requests</h5>
                     <div class="fixed-table-container-sm">
@@ -60,7 +60,7 @@
                                 <td class="text-center">
                                     <button
                                         v-if="request.status == 'pending' || request.status == 'declined'"
-                                        class="btn btn-outline-danger m-1 tableBtn w-75"
+                                        class="myBtn m-1 tableBtn w-75"
                                         id="reject-btn"
                                         @click="confirmDelete(request.id)"
                                     >
@@ -68,7 +68,7 @@
                                     </button>
                                     <button
                                         v-else
-                                        class="btn btn-secondary m-1 tableBtn w-75"
+                                        class="myBtn-outline m-1 tableBtn w-75"
                                         id="reject-btn"
                                         @click="cancelHoliday(request.id)"
                                     >

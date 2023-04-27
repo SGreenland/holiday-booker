@@ -15,7 +15,7 @@
                     rows="3"
                 ></textarea>
                 <div v-if="!action">
-                    <button @click="$emit('close')" class="modalBtn myBtn m-auto w-100">
+                    <button @click="$emit('close')" class="modalBtn myBtn m-auto w-75">
                         Close
                     </button>
                 </div>

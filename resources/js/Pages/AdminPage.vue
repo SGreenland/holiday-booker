@@ -14,7 +14,7 @@
 
         <div class="col-xl-6 col-lg-10 col-md-12 col-sm-12 mx-auto p-2">
             <div class="fixed-table-container card p-3 rounded-3 shadow-lg">
-            <h2 class="text-center mb-3">Holiday Requests</h2>
+            <h3 class="text-center mb-3">Holiday Requests</h3>
             <table class="w-100">
                 <thead scope="row" class="sticky-head">
                     <th class="table-header">Name</th>
@@ -51,7 +51,7 @@
         </div>
          <div class="col-xl-6 col-lg-10 col-sm-12 mx-auto p-2">
             <div class="fixed-table-container card p-3 rounded-3 shadow-lg h-100">
-            <h2 class="text-center mb-3">Cancellation Requests</h2>
+            <h3 class="text-center mb-3">Cancellation Requests</h3>
             <table class="w-100">
                 <thead scope="row" class="sticky-head">
                     <th class="table-header">Name</th>
