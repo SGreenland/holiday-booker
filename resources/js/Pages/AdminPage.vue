@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="container-fluid d-flex flex-wrap m-auto">
+    <div id="mainContent" class="container-fluid d-flex flex-wrap m-auto main-content">
         <div class="w-100 text-center">
             <h2>Admin</h2>
         </div>
@@ -14,7 +14,7 @@
 
         <div class="col-xl-6 col-lg-10 col-md-12 col-sm-12 mx-auto p-2">
             <div class="fixed-table-container card p-3 rounded-3 shadow-lg">
-            <h3 class="text-center mb-3">Holiday Requests</h3>
+            <h4 class="text-center mb-3">Holiday Requests</h4>
             <table class="w-100">
                 <thead scope="row" class="sticky-head">
                     <th class="table-header">Name</th>
@@ -31,19 +31,26 @@
                     <td class="">{{ request.total_days }}</td>
                     <td class="text-center">
                         <button
-                            class="btn btn-info m-1 tableBtn"
+                            class="btn btn-danger m-1 tableBtn"
+                            id="reject-btn"
+                            @click="confirmRejection(request.id, 'request')"
+                        >
+                            <b-icon icon="clipboard-x"></b-icon>
+                        </button>
+                          <b-tooltip placement="top" triggers="hover" target="reject-btn">
+                                Decline request
+                         </b-tooltip>
+                        <button
+                            class="btn btn-success m-1 tableBtn"
                             id="approve-btn"
                             @click="approveHoliday(request.id)"
                             data-bs-target="#exampleModalCenter"
                         >
-                            Approve</button
-                        ><button
-                            class="btn btn-secondary m-1 tableBtn"
-                            id="reject-btn"
-                            @click="confirmRejection(request.id, 'request')"
+                            <b-icon icon="clipboard-check"></b-icon></button
                         >
-                            Reject
-                        </button>
+                        <b-tooltip placement="top" triggers="hover" target="approve-btn">
+                                Approve request
+                         </b-tooltip>
                     </td>
                 </tr>
             </table>
@@ -51,7 +58,7 @@
         </div>
          <div class="col-xl-6 col-lg-10 col-sm-12 mx-auto p-2">
             <div class="fixed-table-container card p-3 rounded-3 shadow-lg h-100">
-            <h3 class="text-center mb-3">Cancellation Requests</h3>
+            <h4 class="text-center mb-3">Cancellation Requests</h4>
             <table class="w-100">
                 <thead scope="row" class="sticky-head">
                     <th class="table-header">Name</th>
@@ -67,20 +74,27 @@
                     <td class="">{{ request.end_date }}</td>
                     <td class="">{{ request.total_days }}</td>
                     <td class="text-center">
-                        <button
-                            class="btn btn-info m-1 tableBtn"
-                            id="approve-btn"
+                       <button
+                            class="btn btn-danger m-1 tableBtn"
+                            id="reject-cancel"
+                            @click="rejectCancellation(request.id)"
+                        >
+                            <b-icon icon="clipboard-x"></b-icon>
+                        </button>
+                        <b-tooltip placement="top" triggers="hover" target="reject-cancel">
+                                Decline request
+                         </b-tooltip>
+                         <button
+                            class="btn btn-success m-1 tableBtn"
+                            id="approve-cancel"
                             @click="approveCancellation(request.id)"
                             data-bs-target="#exampleModalCenter"
                         >
-                            Approve</button
-                        ><button
-                            class="btn btn-secondary m-1 tableBtn"
-                            id="reject-btn"
-                            @click="rejectCancellation(request.id)"
+                            <b-icon icon="clipboard-check"></b-icon></button
                         >
-                            Reject
-                        </button>
+                         <b-tooltip placement="top" triggers="hover" target="approve-cancel">
+                                Approve request
+                         </b-tooltip>
                     </td>
                 </tr>
             </table>

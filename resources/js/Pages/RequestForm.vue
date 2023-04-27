@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+    <div id="mainContent" class="main-content">
         <custom-alert v-if="displayAlert" :message="alertMessage" @close="displayAlert = false">
         </custom-alert>
         <h2 class="text-center">Request Holiday</h2>

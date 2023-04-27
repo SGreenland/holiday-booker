@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="container-fluid">
+    <div id="mainContent" class="container-fluid main-content">
         <custom-alert
             v-if="displayAlert"
             :message="alertMessage"
@@ -60,20 +60,26 @@
                                 <td class="text-center">
                                     <button
                                         v-if="request.status == 'pending' || request.status == 'declined'"
-                                        class="myBtn m-1 tableBtn w-75"
-                                        id="reject-btn"
+                                        class="btn btn-danger tableBtn w-75"
+                                        id="delete-btn"
                                         @click="confirmDelete(request.id)"
                                     >
                                         <b-icon icon="trash"></b-icon>
+                                        <b-tooltip placement="left" triggers="hover" target="delete-btn">
+                                        Delete Request
+                                        </b-tooltip>
                                     </button>
                                     <button
                                         v-else
-                                        class="myBtn-outline m-1 tableBtn w-75"
-                                        id="reject-btn"
+                                        class="btn btn-outline-secondary tableBtn w-75"
+                                        id="cancel-btn"
                                         @click="cancelHoliday(request.id)"
                                     >
                                         <b-icon icon="trash"></b-icon>
                                     </button>
+                                    <b-tooltip placement="left" triggers="hover" target="cancel-btn">
+                                        Send a request to Cancel this holiday
+                                    </b-tooltip>
                                 </td>
                             </tr>
                         </table>
@@ -113,6 +119,9 @@ export default {
 
         };
     },
+
+
+
     computed: {
         getFilteredHoliday() {
             if(!this.filteredHoliday) return this.userHoliday;

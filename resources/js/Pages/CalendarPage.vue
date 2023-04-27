@@ -1,6 +1,6 @@
 <template lang="">
-    <div class="container-fluid row m-auto vh-75">
-        <calender :disabled-dates='{ weekends: [0, 6] }' :key="calendarKey" ref="cal" :attributes="attrs" class="col p-3"></calender>
+    <div id="mainContent" class="container-fluid row m-auto vh-75 main-content">
+        <calender :disabled-dates='{ weekends: [0, 6] }' :key="calendarKey" ref="cal" :attributes="attrs" class="col p-3 me-4"></calender>
         <div class="d-flex w-100 justify-content-between">
             <div>
                 <b class="me-2">Change my Color:</b>

@@ -14337,8 +14337,33 @@ textarea.form-control-lg {
   cursor: pointer !important;
 }
 
+.btn-outline-secondary {
+  color: #545b62 !important;
+  border: #545b62 solid 2px !important;
+}
+
+.btn-outline-secondary:hover {
+  background-color: transparent !important;
+}
+
+.btn-success {
+  background-color: transparent !important;
+  color: #015701 !important;
+  border: #015701 solid 2px !important;
+}
+
+.btn-danger {
+  background-color: transparent !important;
+  color: darkred !important;
+  border: darkred solid 2px !important;
+}
+
 body {
-  background-color: aliceblue !important;
+  background-color: #f5faff !important;
+}
+
+.main-content {
+  padding-right: 210px !important;
 }
 
 .offcanvas-header {
@@ -14364,7 +14389,7 @@ i.fa-bars:hover {
 
 .offcanvas {
   color: #663577;
-  width: 200px !important;
+  width: 210px !important;
 }
 
 .navLink {
@@ -14465,7 +14490,7 @@ td {
 }
 
 .tableBtn {
-  width: 45%;
+  width: 40%;
 }
 @media (max-width: 600px) {
   .tableBtn {

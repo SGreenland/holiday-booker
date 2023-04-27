@@ -24,5 +24,26 @@
      &:hover {
         cursor: pointer !important;
      }
-
 }
+
+.btn-outline-secondary {
+    color: darken(#6c757d, 10%) !important;
+    border: darken(#6c757d, 10%) solid 2px !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: transparent !important;
+}
+
+.btn-success {
+    background-color: transparent !important;
+    color: rgb(1, 87, 1)!important;
+    border: rgb(1, 87, 1) solid 2px !important;
+}
+
+.btn-danger {
+    background-color: transparent !important;
+    color: darkred !important;
+    border:darkred solid 2px !important;
+}
+

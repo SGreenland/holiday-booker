@@ -1,5 +1,9 @@
 body {
-    background-color: aliceblue !important;
+    background-color: lighten(aliceblue,1%) !important;
+}
+
+.main-content {
+    padding-right: 210px !important;
 }
 
 .offcanvas-header {
@@ -26,7 +30,7 @@ i.fa-bars {
 
 .offcanvas {
     color: $darkPurple;
-    width: 200px !important;
+    width: 210px !important;
 }
 
 .navLink {

@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+    <div id="mainContent" class="main-content">
         <div class="w-100 text-center">
             <h2>My Account</h2>
         </div>
