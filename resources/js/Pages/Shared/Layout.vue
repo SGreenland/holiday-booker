@@ -8,6 +8,7 @@
                     ><h2 class="">Holiday Booker</h2></a
                 >
             </div>
+            <b-icon role="button" @click="goToNotifications" icon="bell" class="notification-bell"></b-icon>
             <!-- side bar nav -->
             <div v-show="path != 'login' && path != 'register'" class="navLinks p-4 d-flex align-items-center">
                 <button
@@ -47,7 +48,7 @@
                          <div class="mb-5 navItem">
                             <i class="fa fa-home"></i>
                              <inertia-link
-                                class="navLink"
+                                :class="getNavLinkClass('/')"
                                 type="button"
                                 as="button"
                                 href="/"
@@ -57,7 +58,7 @@
                          <div class="mb-5 navItem">
                             <i class="fa fa-user"></i>
                              <inertia-link
-                                class="navLink"
+                                :class="getNavLinkClass('my-account')"
                                 type="button"
                                 as="button"
                                 href="/my-account"
@@ -69,7 +70,7 @@
                         <div class="mb-5 navItem">
                             <i class="bi bi-calendar"></i>
                             <inertia-link
-                                class="navLink"
+                                :class="getNavLinkClass('holiday')"
                                 type="button"
                                 as="button"
                                 href="/holiday"
@@ -79,7 +80,7 @@
                         <div class="mb-5 navItem">
                             <i class="bi bi-calendar-plus"></i>
                             <inertia-link
-                                class="navLink"
+                                :class="getNavLinkClass('holiday/create')"
                                 as="button"
                                 type="button"
                                 href="/holiday/create"
@@ -89,7 +90,7 @@
                         <div v-if="isAdmin" class="mb-5 navItem">
                             <i class="bi bi-briefcase-fill"></i>
                             <inertia-link
-                                class="navLink"
+                                :class="getNavLinkClass('admin')"
                                 as="button"
                                 type="button"
                                 href="/admin"
@@ -129,12 +130,34 @@ export default {
             return this.$page.props.pathname;
         }
     },
+    mounted() {
+        //leaves menu open for desktop and closed for mobile
+        if(window.innerWidth < 700){
+            this.$refs.offcanvas.classList.remove('show');
+            Array.from(document.getElementsByClassName('navLink')).forEach(link => {
+                link.setAttribute('data-bs-dismiss', 'offcanvas')
+            })
+        }
+    },
     methods: {
         expandContent() {
-            document.getElementById('mainContent').classList.remove('main-content')
+            //apparently naughty...
+            // document.getElementById('mainContent').classList.remove('main-content')
+            //is this really better?
+            this.$parent.$children[0].$children[0].$refs.mainContent.classList.remove('main-content');
         },
         reduceContent() {
-            document.getElementById('mainContent').classList.add('main-content')
+            // document.getElementById('mainContent').classList.add('main-content')
+            this.$parent.$children[0].$children[0].$refs.mainContent.classList.add('main-content');
+        },
+        goToNotifications() {
+            this.$inertia.get('/notifications');
+        },
+        getNavLinkClass(link) {
+            if(link == this.$page.props.pathname){
+                return 'navLink active';
+            }
+            else return 'navLink';
         }
     }
 

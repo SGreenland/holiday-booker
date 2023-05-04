@@ -1,8 +1,7 @@
 <template lang="">
-    <div id="mainContent" class="main-content">
+    <div ref="mainContent" id="mainContent" class="main-content">
         <custom-alert v-if="displayAlert" :message="alertMessage" @close="displayAlert = false">
         </custom-alert>
-        <h2 class="text-center">Request Holiday</h2>
         <form
             class="col-11 col-lg-6 col-md-8 col-sm-10 m-auto p-4 card rounded-3 shadow h-75 justify-content-between"
             @submit.prevent="submit"

@@ -10,6 +10,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\CancellationRequestController;
+use Illuminate\Routing\RouteGroup;
+use Symfony\Component\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +23,6 @@ use App\Http\Controllers\CancellationRequestController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 
 
 Route::get('/admin', [AdminController::class, "index"])->middleware("auth");

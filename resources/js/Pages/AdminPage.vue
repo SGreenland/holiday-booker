@@ -1,8 +1,5 @@
 <template lang="">
-    <div id="mainContent" class="container-fluid d-flex flex-wrap m-auto main-content">
-        <div class="w-100 text-center">
-            <h2>Admin</h2>
-        </div>
+    <div ref="mainContent" id="mainContent" class="container-fluid d-flex flex-wrap m-auto main-content">
         <custom-alert
             v-if="displayAlert"
             :action="alertAction"
@@ -37,7 +34,7 @@
                         >
                             <b-icon icon="clipboard-x"></b-icon>
                         </button>
-                          <b-tooltip placement="top" triggers="hover" target="reject-btn">
+                          <b-tooltip placement="top" triggers="hover" :target="'reject-btn' + request.id">
                                 Decline request
                          </b-tooltip>
                         <button
@@ -48,7 +45,7 @@
                         >
                             <b-icon icon="clipboard-check"></b-icon></button
                         >
-                        <b-tooltip placement="top" triggers="hover" target="approve-btn">
+                        <b-tooltip placement="top" triggers="hover" :target="'approve-btn' + request.id">
                                 Approve request
                          </b-tooltip>
                     </td>
@@ -76,23 +73,23 @@
                     <td class="text-center">
                        <button
                             class="btn btn-danger m-1 tableBtn"
-                            id="reject-cancel"
+                            :id="'reject-cancel' + request.id"
                             @click="rejectCancellation(request.id)"
                         >
                             <b-icon icon="clipboard-x"></b-icon>
                         </button>
-                        <b-tooltip placement="top" triggers="hover" target="reject-cancel">
+                        <b-tooltip placement="top" triggers="hover" :target="'reject-cancel' + request.id">
                                 Decline request
                          </b-tooltip>
                          <button
                             class="btn btn-success m-1 tableBtn"
-                            id="approve-cancel"
+                            :id="'approve-cancel' + request.id"
                             @click="approveCancellation(request.id)"
                             data-bs-target="#exampleModalCenter"
                         >
                             <b-icon icon="clipboard-check"></b-icon></button
                         >
-                         <b-tooltip placement="top" triggers="hover" target="approve-cancel">
+                         <b-tooltip placement="top" triggers="hover" :target="'approve-cancel' + request.id">
                                 Approve request
                          </b-tooltip>
                     </td>

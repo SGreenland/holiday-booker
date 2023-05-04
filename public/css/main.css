@@ -14365,6 +14365,11 @@ body {
 .main-content {
   padding-right: 210px !important;
 }
+@media screen and (max-width: 700px) {
+  .main-content {
+    padding-right: 0 !important;
+  }
+}
 
 .offcanvas-header {
   height: 75px;
@@ -14376,6 +14381,12 @@ body {
   color: whitesmoke;
   margin-bottom: 1rem;
   height: 75px;
+}
+
+.notification-bell {
+  position: absolute;
+  font-size: large;
+  right: 220px;
 }
 
 i.fa-bars {
@@ -14399,6 +14410,10 @@ i.fa-bars:hover {
   margin-left: 5px;
 }
 
+.navLink.active::after {
+  transform: scale(1, 1);
+}
+
 .navItem:hover,
 a.navLink {
   color: #451655;
@@ -14416,6 +14431,12 @@ a.navLink {
   transition: 500ms transform;
 }
 
+.navItem {
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
+
 .barsBtn {
   all: unset;
   padding: 1rem;
@@ -14426,12 +14447,12 @@ a.navLink {
   place-items: center;
 }
 
-.vc-weeks {
-  row-gap: 1.5rem;
+.vc-pane-layout {
+  height: 100% !important;
 }
 
-.vc-header {
-  margin-bottom: 2rem;
+.vc-weeks {
+  height: 95% !important;
 }
 
 input,
@@ -14512,4 +14533,12 @@ td {
 .tableBtn {
     font-size: smaller;
   }
+}
+
+.vh-85 {
+  height: 85vh !important;
+}
+
+.vh-75 {
+  height: 75vh !important;
 }

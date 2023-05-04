@@ -49,10 +49,13 @@ class HolidayController extends Controller
      */
     public function store(Request $request)
     {
+        Log::debug(auth()->user()->holidays);
         //validate request
-        // $request->validate([
-        //     'start_date' => 'required'
-        // ])
+        $request->validate([
+            'start_date' => 'date|required',
+            'end_date' => 'date|required',
+            'total_days' => 'integer|required'
+        ]);
 
         //check if holiday clashes with existing holiday or already booked
         $dates = CarbonPeriod::create($request->start_date, $request->end_date);

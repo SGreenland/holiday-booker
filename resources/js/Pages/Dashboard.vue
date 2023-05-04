@@ -1,5 +1,6 @@
 <template lang="">
-    <div id="mainContent" class="container-fluid main-content">
+    <div ref="mainContent" id="mainContent" class="container-fluid main-content">
+        <!--alert modal-->
         <custom-alert
             v-if="displayAlert"
             :message="alertMessage"
@@ -7,24 +8,29 @@
             @close="displayAlert = false, alertAction=false"
             @confirmedDelete="deleteRequest"
         ></custom-alert>
-        <div class="w-100 text-center">
-            <h2>Dashboard</h2>
-        </div>
-        <div class="row col-12 m-auto">
+
+        <div class="col-12 d-flex vh-85">
+             <!--pie-chart allowance-->
             <div
-                class="col-12 col-lg-6 col-sm-12 p-2 d-flex"
+                class="col-12 col-lg-6 col-sm-12 p-2 d-flex flex-column h-100"
             >
-                <div class="card rounded-3 shadow-lg p-3 w-100 h-100">
+                <div class="card rounded-3 shadow-lg p-3 w-100 h-50 mb-3">
                     <h5 class="w-100 text-center">My Allowance</h5>
                <div class="d-flex h-100 center-content">
                    <apexchart :key="donutKey" width="380" type="donut" :options="options" :series="series"></apexchart>
                </div>
                </div>
+               <!--mini-calendar-->
+               <div class="card rounded-3 shadow-lg p-3 w-100 h-50">
+                <calender class="w-100 h-100" :disabled-dates='{ weekends: [0, 6] }' ref="cal" :attributes="attrs"></calender>
+               </div>
+
             </div>
-            <div class="col col-lg-6 col-sm-12 m-auto p-2">
-                <div class="card rounded-3 shadow-lg p-3">
+            <!--requests-->
+            <div class="col col-lg-6 col-sm-12 p-2 h-100">
+                <div class="card rounded-3 shadow-lg p-3 h-100">
                     <h5 class="w-100 text-center">My Requests</h5>
-                    <div class="fixed-table-container-sm">
+                    <div class="">
                         <table class="w-100">
                             <thead scope="row" class="sticky-head">
                                 <th class="table-header">Start Date</th>
@@ -61,23 +67,23 @@
                                     <button
                                         v-if="request.status == 'pending' || request.status == 'declined'"
                                         class="btn btn-danger tableBtn w-75"
-                                        id="delete-btn"
+                                        :id="'delete-btn' + request.id"
                                         @click="confirmDelete(request.id)"
                                     >
                                         <b-icon icon="trash"></b-icon>
-                                        <b-tooltip placement="left" triggers="hover" target="delete-btn">
+                                        <b-tooltip placement="left" triggers="hover" :target="'delete-btn' + request.id">
                                         Delete Request
                                         </b-tooltip>
                                     </button>
                                     <button
                                         v-else
                                         class="btn btn-outline-secondary tableBtn w-75"
-                                        id="cancel-btn"
+                                        :id="'cancel-btn' + request.id"
                                         @click="cancelHoliday(request.id)"
                                     >
                                         <b-icon icon="trash"></b-icon>
                                     </button>
-                                    <b-tooltip placement="left" triggers="hover" target="cancel-btn">
+                                    <b-tooltip placement="left" triggers="hover" :target="'cancel-btn' + request.id">
                                         Send a request to Cancel this holiday
                                     </b-tooltip>
                                 </td>
@@ -116,11 +122,36 @@ export default {
             donutKey: 0,
             filter: [{pending: true}, {approved: true}, {declined: true}],
             filteredHoliday: null,
+            attrs: [],
 
         };
     },
 
-
+    mounted() {
+        this.userHoliday.forEach((holiday) => {
+        this.attrs.push({
+          key: holiday.name,
+          dates: [
+            {
+              start: new Date(holiday.start_date),
+              end: new Date(holiday.end_date),
+            },
+          ],
+          excludeDates: { weekends: [0, 6] },
+          highlight: {
+            color: 'purple',
+            ...(holiday.status === "declined" && { color: "gray" }),
+            ...(holiday.status === "pending" && {
+              fillMode: "light",
+            }),
+            ...(holiday.status === "approved" && {
+              fillMode: "solid",
+            }),
+            ...(holiday.status === "declined" && {
+              fillMode: "outline",
+            }),
+          },})})
+    },
 
     computed: {
         getFilteredHoliday() {

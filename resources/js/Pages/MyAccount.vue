@@ -1,11 +1,11 @@
 <template lang="">
     <div id="mainContent" class="main-content">
-        <div class="w-100 text-center">
+        <!-- <div class="w-100 text-center">
             <h2>My Account</h2>
-        </div>
-        <div class="col-11 col-lg-6 col-md-8 col-sm-10 m-auto p-4 card rounded-3 shadow h-75 overflow-auto justify-content-between">
+        </div> -->
+        <div class="col-11 col-lg-6 col-md-8 col-sm-10 m-auto p-3 mb-3 card rounded-3 shadow">
 
-                <form @submit.prevent="submitPersonalInfo" class="w-100">
+                <form @submit.prevent="submitPersonalInfo" class="w-100 me-3">
                      <h5 class="text-left">Personal Details</h5>
                     <div class="d-flex justify-content-end"><i role="button" @click="editPersonalInfo('name')" class="fa fa-edit fa-lg"></i></div>
                     <label class="fw-bold" for="name">User Name:</label>
@@ -80,7 +80,6 @@ export default {
                 })
         },
         submitNewPassword(){
-            console.log(this.pwForm)
             this.$inertia.put('/user/password', this.pwForm, {
                 onSuccess: () => {
                     this.clearErrors();
@@ -88,7 +87,6 @@ export default {
                     this.editing = false;
                 },
                 onError: (errors) => {
-                console.log(errors)
                 if(errors.updatePassword.current_password || errors.updatePassword.password){
                     this.errors.currentPw = errors.updatePassword.current_password;
                     this.errors.newPw = errors.updatePassword.password;
