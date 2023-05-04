@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Error;
+use Exception;
+use Throwable;
 use Carbon\Carbon;
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Holiday;
 use Carbon\CarbonPeriod;
@@ -13,9 +17,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreHolidayRequest;
 use App\Http\Requests\UpdateHolidayRequest;
-use Error;
-use Exception;
-use Throwable;
 
 class HolidayController extends Controller
 {
@@ -27,7 +28,12 @@ class HolidayController extends Controller
     public function index()
     {
         //
-        return Inertia::render("CalendarPage", ['allHoliday' => Holiday::all()]);
+        $allHoliday = Holiday::get();
+
+        foreach($allHoliday as $holiday) {
+            $holiday['team'] = User::find($holiday->user_id)->team->name;
+        }
+        return Inertia::render("CalendarPage", ['allHoliday' => $allHoliday]);
     }
 
     /**

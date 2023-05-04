@@ -1,28 +1,23 @@
 <template lang="">
     <div ref="mainContent" id="mainContent" class="container-fluid row m-auto h-75 main-content">
         <calender :height="'max-content'" :disabled-dates='{ weekends: [0, 6] }' :key="calendarKey" ref="cal" :attributes="attrs" class="col h-100 p-3 me-4"></calender>
-        <div class="d-flex w-100 justify-content-between">
-            <div>
-                <b class="me-2">Change my Color:</b>
+        <div class="row col-12 justify-content-evenly pt-2">
+            <div class="col-lg-3 col-sm-12">
+                <b>Change my Color:</b>
                 <select v-model="myColor" @change="changeColor">
                     <option v-for="color in colorOptions">{{ color }}</option>
                 </select>
             </div>
-            <div class="col-lg-6 col-sm-8 d-flex justify-content-around align-items-center">
-                <b class="me-2">Filter Holiday:</b>
-                <span>
-                    <label for="my-holiday" class="me-2">Just My Holiday</label>
-                    <input v-model="filter.myHoliday" type="checkbox" name="" id="my-holiday">
-                </span>
-                <span>
-                    <label for="pending" class="me-2">Pending</label>
-                    <input v-model="filter.pending" type="checkbox" name="" id="pending">
-                </span>
-                <span>
-                    <label for="approved" class="me-2">Approved</label>
-                    <input v-model="filter.approved" type="checkbox" name="" id="approved">
-                </span>
-            </div>
+                <div class="col-lg-3 col-sm-12">
+                    <b>Filter by Team:</b>
+                    <b-select v-model="selectedTeam" :options="teamOptions">
+                    </b-select>
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <b>Filter by Status:</b>
+                    <b-select v-model="selectedStatus" :options="statusOptions">
+                    </b-select>
+                </div>
         </div>
     </div>
 </template>
@@ -43,6 +38,10 @@ export default {
       calendarKey: 1,
       myColor: 'pink',
       colorOptions: ['pink', 'green', 'blue',  'yellow', 'orange', 'teal', 'purple'],
+      teamOptions: ['HR', 'Accounts', 'Sales'],
+      statusOptions: ['pending', 'approved', 'declined'],
+      selectedTeam: null,
+      selectedStatus: null,
     };
   },
 
@@ -124,40 +123,31 @@ export default {
     },
   },
   watch: {
-    filter: {
-        deep: true,
-        handler() {
-            if(Object.values(this.filter).filter(val => !val).length == 3){
-                this.holidays = this.allHoliday;
-                this.attrs = [];
-                this.setCalendar()
-                this.calendarKey += 1
-            }
-            else {
-                  if(this.filter.pending && !this.filter.myHoliday && !this.filter.approved){
-                this.holidays = this.allHoliday.filter(hol => hol.status == 'pending')
-
-                }
-                else if(this.filter.pending && this.filter.myHoliday && !this.filter.approved){
-                    this.holidays = this.allHoliday.filter(hol => hol.status == 'pending' && hol.user_id == this.$page.props.auth.user.id)
-                }
-                else if (this.filter.pending && this.filter.myHoliday && this.filter.approved){
-                    this.holidays = this.allHoliday.filter(hol => hol.status == 'pending|approved' && hol.user_id == this.$page.props.auth.user.id)
-                }
-                else if (this.filter.approved && !this.filter.pending && !this.filter.myHoliday){
-                    this.holidays = this.allHoliday.filter(hol => hol.status == 'approved')
-                }
-                else if (this.filter.approved && this.filter.pending && !this.filter.myHoliday){
-                    this.holidays = this.allHoliday.filter(hol => hol.status == 'approved|pending')
-                }
-                else if(this.filter.myHoliday && !this.filter.pending && !this.filter.approved){
-                    this.holidays = this.allHoliday.filter(hol => hol.user_id == this.$page.props.auth.user.id)
-                }
-                this.attrs = [];
-                this.setCalendar();
-            }
+    selectedTeam() {
+        if(this.selectedStatus){
+            this.holidays = this.allHoliday.filter(hol => hol.team == this.selectedTeam && hol.status == this.selectedStatus);
         }
+        else {
+            this.holidays = this.allHoliday.filter(hol => hol.team == this.selectedTeam);
+        }
+        this.attrs = [];
+        this.$nextTick(() => {
+             this.setCalendar();
+        })
+
     },
+    selectedStatus() {
+        if(this.selectedTeam){
+            this.holidays = this.allHoliday.filter(hol => hol.team == this.selectedTeam && hol.status == this.selectedStatus);
+        }
+        else {
+            this.holidays = this.allHoliday.filter(hol => hol.status == this.selectedStatus);
+        }
+        this.attrs = [];
+        this.$nextTick(() => {
+            this.setCalendar();
+        })
+    }
   }
 };
 </script>
