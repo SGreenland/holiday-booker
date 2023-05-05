@@ -1,0 +1,21 @@
+.bell-badge {
+    font-size: x-small !important;
+    position: relative;
+    bottom: 15px;
+    right: 20px;
+}
+
+.notification-bell {
+    position: absolute;
+    font-size: x-large;
+    right: 220px;
+}
+
+i.fa-bars {
+    font-size: larger;
+    &:hover {
+        color: $lightPurple;
+        cursor: pointer;
+    }
+    z-index: -1;
+}

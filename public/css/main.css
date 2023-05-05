@@ -14383,21 +14383,6 @@ body {
   height: 75px;
 }
 
-.notification-bell {
-  position: absolute;
-  font-size: large;
-  right: 220px;
-}
-
-i.fa-bars {
-  font-size: larger;
-  z-index: -1;
-}
-i.fa-bars:hover {
-  color: #b49fbb;
-  cursor: pointer;
-}
-
 .offcanvas {
   color: #663577;
   width: 210px !important;
@@ -14541,4 +14526,26 @@ td {
 
 .vh-75 {
   height: 75vh !important;
+}
+
+.bell-badge {
+  font-size: x-small !important;
+  position: relative;
+  bottom: 15px;
+  right: 20px;
+}
+
+.notification-bell {
+  position: absolute;
+  font-size: x-large;
+  right: 220px;
+}
+
+i.fa-bars {
+  font-size: larger;
+  z-index: -1;
+}
+i.fa-bars:hover {
+  color: #b49fbb;
+  cursor: pointer;
 }

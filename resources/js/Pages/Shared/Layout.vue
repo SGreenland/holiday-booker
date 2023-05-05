@@ -8,7 +8,13 @@
                     ><h2 class="">Holiday Booker</h2></a
                 >
             </div>
-            <b-icon role="button" @click="goToNotifications" icon="bell" class="notification-bell"></b-icon>
+
+                <div role="button" @click="goToNotifications" ref="bell" class="notification-bell">
+                     <b-icon icon="bell">
+                    </b-icon>
+                    <span class="badge bg-danger bell-badge">{{ $page.props.auth.user.notifications.length}}</span>
+                </div>
+
             <!-- side bar nav -->
             <div v-show="path != 'login' && path != 'register'" class="navLinks p-4 d-flex align-items-center">
                 <button
@@ -145,10 +151,12 @@ export default {
             // document.getElementById('mainContent').classList.remove('main-content')
             //is this really better?
             this.$parent.$children[0].$children[0].$refs.mainContent.classList.remove('main-content');
+            this.$refs.bell.style.right = '90px';
         },
         reduceContent() {
             // document.getElementById('mainContent').classList.add('main-content')
             this.$parent.$children[0].$children[0].$refs.mainContent.classList.add('main-content');
+            this.$refs.bell.style.right = '220px';
         },
         goToNotifications() {
             this.$inertia.get('/notifications');

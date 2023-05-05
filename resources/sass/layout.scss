@@ -22,20 +22,6 @@ body {
     height: 75px;
 }
 
-.notification-bell {
-    position: absolute;
-    font-size: large;
-    right: 220px;
-}
-
-i.fa-bars {
-    font-size: larger;
-    &:hover {
-        color: $lightPurple;
-        cursor: pointer;
-    }
-    z-index: -1;
-}
 
 .offcanvas {
     color: $darkPurple;

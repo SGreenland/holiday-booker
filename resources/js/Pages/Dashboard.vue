@@ -9,7 +9,7 @@
             @confirmedDelete="deleteRequest"
         ></custom-alert>
 
-        <div class="col-12 d-flex vh-85">
+        <div class="col-12 d-flex flex-wrap vh-85">
              <!--pie-chart allowance-->
             <div
                 class="col-12 col-lg-6 col-sm-12 p-2 d-flex flex-column h-100"
@@ -123,7 +123,6 @@ export default {
             filter: [{pending: true}, {approved: true}, {declined: true}],
             filteredHoliday: null,
             attrs: [],
-
         };
     },
 

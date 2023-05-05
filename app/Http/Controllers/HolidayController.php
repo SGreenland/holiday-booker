@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreHolidayRequest;
 use App\Http\Requests\UpdateHolidayRequest;
+use App\Notifications\HolidayStatusNotification;
 
 class HolidayController extends Controller
 {
@@ -131,8 +132,11 @@ class HolidayController extends Controller
         if($user->can('update', $holiday)){
             $holiday->status = $request->status;
             $holiday->rejection_reason = $request->rejection_reason;
-
             $holiday->save();
+
+            $data = ['adminUser' => $user->name, 'status' => $request->status, 'rejectionReason' => $holiday->rejection_reason];
+
+            User::find($holiday->user_id)->notify(New HolidayStatusNotification($data));
         }
         else abort(403);
 

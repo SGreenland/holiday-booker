@@ -40,7 +40,7 @@ class HandleInertiaRequests extends Middleware
             //
             'auth.user' => fn () => $request->user()
 
-                ? $request->user()->only('name', 'id', 'email', 'roles')
+                ? $request->user()->only('name', 'id', 'email', 'roles', 'notifications')
 
                 : null,
             'pathname' => $request->route()->uri(),
