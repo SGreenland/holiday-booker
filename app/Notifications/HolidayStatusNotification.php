@@ -23,6 +23,8 @@ class HolidayStatusNotification extends Notification
         $this->adminUser = $data['adminUser'];
         $this->status = $data['status'];
         $this->rejectionReason = $data['rejectionReason'];
+        $this->startDate = $data['startDate'];
+        $this->endDate = $data['endDate'];
     }
 
     /**
@@ -63,6 +65,8 @@ class HolidayStatusNotification extends Notification
             'adminUser' => $this->adminUser,
             'status' => $this->status,
             'rejectionReason' => $this->rejectionReason,
+            'startDate' => $this->startDate,
+            'endDate' => $this->endDate
         ];
     }
 }

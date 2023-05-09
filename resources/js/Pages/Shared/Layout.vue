@@ -9,15 +9,16 @@
                 >
             </div>
 
-                <div role="button" @click="goToNotifications" ref="bell" class="notification-bell">
+                <div v-if="$page.props.auth.user" role="button" @click="goToNotifications" ref="bell" class="notification-bell">
                      <b-icon icon="bell">
                     </b-icon>
-                    <span class="badge bg-danger bell-badge">{{ $page.props.auth.user.notifications.length}}</span>
+                    <span v-if="$page.props.auth.user.notifications.length" class="badge bg-danger bell-badge">{{ $page.props.auth.user.notifications.length}}</span>
                 </div>
 
             <!-- side bar nav -->
-            <div v-show="path != 'login' && path != 'register'" class="navLinks p-4 d-flex align-items-center">
+            <div class="navLinks p-4 d-flex align-items-center">
                 <button
+                    v-show="path != 'login' && path != 'register'"
                     class="barsBtn"
                     type="button"
                     aria-controls="offcanvasRight"
@@ -29,7 +30,7 @@
                 </button>
                 <div
                     v-show="path != 'login' && path != 'register'"
-                    class="offcanvas show offcanvas-end"
+                    class='offcanvas show offcanvas-end'
                     data-bs-backdrop="false"
                     data-bs-scroll="true"
                     ref="offcanvas"
@@ -167,7 +168,7 @@ export default {
             }
             else return 'navLink';
         }
-    }
+    },
 
 };
 </script>

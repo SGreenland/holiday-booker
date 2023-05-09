@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\CancellationRequestController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Routing\RouteGroup;
 use Symfony\Component\Routing\Route as RoutingRoute;
 
@@ -32,3 +33,7 @@ Route::resource("/holiday", HolidayController::class);
 Route::post("/request/store", [HolidayController::class, 'store']);
 Route::get("/my-account", [UserController::class, 'edit']);
 Route::post('/user/cancellation-request', [CancellationRequestController::class, 'store']);
+//notifications
+Route::get('/notifications', [NotificationController::class, 'index']);
+Route::post('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead']);
+Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);

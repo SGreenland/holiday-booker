@@ -14549,3 +14549,11 @@ i.fa-bars:hover {
   color: #b49fbb;
   cursor: pointer;
 }
+
+.card.bg-success {
+  --bs-bg-opacity: 0.2 !important ;
+}
+
+.card.bg-danger {
+  --bs-bg-opacity: 0.2 !important ;
+}

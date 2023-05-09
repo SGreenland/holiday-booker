@@ -134,7 +134,7 @@ class HolidayController extends Controller
             $holiday->rejection_reason = $request->rejection_reason;
             $holiday->save();
 
-            $data = ['adminUser' => $user->name, 'status' => $request->status, 'rejectionReason' => $holiday->rejection_reason];
+            $data = ['adminUser' => $user->name, 'status' => $request->status, 'rejectionReason' => $request->rejection_reason, 'startDate' => $holiday->start_date, 'endDate' => $holiday->end_date];
 
             User::find($holiday->user_id)->notify(New HolidayStatusNotification($data));
         }

@@ -10,3 +10,12 @@
 @import "./tables.scss";
 @import "./heights.scss";
 @import "./icons.scss";
+
+
+.card.bg-success {
+    --bs-bg-opacity: 0.2 !important
+}
+
+.card.bg-danger {
+    --bs-bg-opacity: 0.2 !important
+}
