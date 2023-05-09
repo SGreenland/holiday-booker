@@ -48,10 +48,10 @@ mysql -u root
 
 #### add the database connection config to your .env file
 ```sh
-DB_CONNECTION=mysql\
-DB_DATABASE={your_db_name}\
-DB_USERNAME=root\
-DB_PASSWORD=\
+DB_CONNECTION=mysql
+DB_DATABASE={your_db_name}
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
 #### run the migration files to generate the schema
