@@ -15,36 +15,36 @@ A Holiday booking web app, built with Laravel and Vue.js
 
 ![image](https://github.com/SGreenland/holiday-booker/assets/78597962/ee17e7fb-085a-4fc4-bf4a-8626d78d6916)
 
-### Run locally
+## Run locally
 
 After cloning the project:
 
-# create a .env file
+#### create a .env file
 cp .env.example .env
 
-# install composer dependencies
+#### install composer dependencies
 composer install
 
-# install npm dependencies
+#### install npm dependencies
 npm install
 
-# generate a key for your application
+#### generate a key for your application
 php artisan key:generate
 
-# create a local MySQL database (make sure you have MySQL up and running)
+#### create a local MySQL database (make sure you have MySQL up and running)
 mysql -u root
 
 > create database {your_db_name};
 > exit;
 
-# add the database connection config to your .env file
+#### add the database connection config to your .env file
 DB_CONNECTION=mysql
 DB_DATABASE={your_db_name}
 DB_USERNAME=root
 DB_PASSWORD=
 
-# run the migration files to generate the schema
+#### run the migration files to generate the schema
 php artisan migrate
 
-# run webpack and watch for changes
+#### run webpack and watch for changes
 npm run watch
