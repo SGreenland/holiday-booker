@@ -66,10 +66,10 @@
                 </thead>
                 <td colspan="5" v-if="!cancellationRequests.length" class="w-100 text-center"> You haven't got any cancellation requests at the moment.</td>
                 <tr v-for="request in cancellationRequests">
-                    <td class="">{{ request.name }}</td>
-                    <td class="">{{ request.start_date }}</td>
-                    <td class="">{{ request.end_date }}</td>
-                    <td class="">{{ request.total_days }}</td>
+                    <td class="">{{ request.holiday.name }}</td>
+                    <td class="">{{ request.holiday.start_date }}</td>
+                    <td class="">{{ request.holiday.end_date }}</td>
+                    <td class="">{{ request.holiday.total_days }}</td>
                     <td class="text-center">
                        <button
                             class="btn btn-danger m-1 tableBtn"
@@ -117,6 +117,9 @@ export default {
         };
     },
 
+    mounted() {
+        console.log(this.cancellationRequests);
+    },
 
     methods: {
         approveHoliday(id) {
@@ -154,7 +157,7 @@ export default {
                 });
         },
         approveCancellation(id) {
-            axios.delete(`/holiday/${id}`).then(() => {
+            axios.put(`/admin/cancellation-requests/update`, {id: id, status: 'approved'}).then(() => {
                 this.displayAlert = true;
                 this.alertMessage = 'Cancellation approved.';
                 this.$inertia.reload({only: ['cancellationRequests']});
@@ -165,7 +168,7 @@ export default {
             })
         },
         rejectCancellation(id){
-            axios.post('/holiday/reject-cancellation', {holidayId: id}).then(() => {
+            axios.put(`/admin/cancellation-requests/update`, {id: id, status: 'declined'}).then(() => {
                 this.displayAlert = true;
                 this.alertMessage = 'Cancellation request declined.';
                 this.$inertia.reload({only: ['cancellationRequests']});

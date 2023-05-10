@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="main-content">
+    <div ref="mainContent" class="main-content">
         <div class="p-4">
             <div class="w-100 mb-2">
                 <h5 class="text-center">My Notifications</h5>
@@ -11,10 +11,10 @@
             <div
                 v-else
                 v-for="notification in $page.props.auth.user.notifications"
-                :class="`card rounded-5 w-100 p-3 d-flex flex-row justify-content-between ${
+                :class="`card rounded-5 w-100 p-3 mb-3 d-flex flex-row justify-content-between ${
                     notification.data.status == 'approved'
                         ? 'bg-success'
-                        : 'bg-declined'
+                        : 'bg-danger'
                 }`"
             >
                 <div>{{ formatNotification(notification) }}</div>
@@ -30,6 +30,7 @@ export default {
             if (notification.type.includes("HolidayStatusNotification")) {
                 return `${notification.data.adminUser} has ${notification.data.status} your request to book holiday from ${notification.data.startDate} till ${notification.data.endDate}.`;
             }
+            else return `${notification.data.adminUser} has ${notification.data.status} your request to cancel your holiday from ${notification.data.startDate} till ${notification.data.endDate}.`
         },
         markAsRead(id){
             axios.post(`/notifications/mark-as-read/${id}`).then(() => {

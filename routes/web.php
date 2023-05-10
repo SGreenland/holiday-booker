@@ -32,8 +32,12 @@ Route::get("/", [UserController::class, 'show'])->middleware("auth");
 Route::resource("/holiday", HolidayController::class);
 Route::post("/request/store", [HolidayController::class, 'store']);
 Route::get("/my-account", [UserController::class, 'edit']);
+//cancellation requests
 Route::post('/user/cancellation-request', [CancellationRequestController::class, 'store']);
+//admin
+Route::put('/admin/cancellation-requests/update', [CancellationRequestController::class, 'update']);
 //notifications
 Route::get('/notifications', [NotificationController::class, 'index']);
 Route::post('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead']);
 Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
+

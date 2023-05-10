@@ -17,8 +17,8 @@ class AdminController extends Controller
     {
         if (Gate::allows("is-admin")) {
             $teamUsers = User::where('team_id', auth()->user()->team_id)->get()->pluck('id');
-            $cancellationRequests = CancellationRequest::whereIn('user_id', $teamUsers)->get()->pluck('holiday_id');
-            return Inertia::render("AdminPage", ['requests' => Holiday::whereIn('user_id', $teamUsers)->where('status', 'pending')->get(), 'cancellationRequests' => Holiday::whereIn('id', $cancellationRequests)->get()]);
+            $cancellationRequests = CancellationRequest::whereIn('user_id', $teamUsers)->where('status', null)->with('holiday')->get();
+            return Inertia::render("AdminPage", ['requests' => Holiday::whereIn('user_id', $teamUsers)->where('status', 'pending')->get(), 'cancellationRequests' => $cancellationRequests]);
         } else {
             return redirect("/");
         }

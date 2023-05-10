@@ -56,13 +56,17 @@ class HolidayController extends Controller
      */
     public function store(Request $request)
     {
-        Log::debug(auth()->user()->holidays);
         //validate request
         $request->validate([
             'start_date' => 'date|required',
             'end_date' => 'date|required',
-            'total_days' => 'integer|required'
+            'total_days' => 'numeric|required'
         ]);
+
+        //check if user has exceeded 30 days
+        if(auth()->user()->holidays()->where('status', 'approved')->sum('total_days') + $request->total_days > 30 || $request->total_days > 30){
+            return response()->json(['message' => 'You have exceeded your allowance!'], 400);
+        }
 
         //check if holiday clashes with existing holiday or already booked
         $dates = CarbonPeriod::create($request->start_date, $request->end_date);
