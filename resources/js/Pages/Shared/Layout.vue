@@ -144,6 +144,7 @@ export default {
             Array.from(document.getElementsByClassName('navLink')).forEach(link => {
                 link.setAttribute('data-bs-dismiss', 'offcanvas')
             })
+            this.expandContent();
         }
     },
     methods: {
@@ -156,8 +157,11 @@ export default {
         },
         reduceContent() {
             // document.getElementById('mainContent').classList.add('main-content')
-            this.$parent.$children[0].$children[0].$refs.mainContent.classList.add('main-content');
-            this.$refs.bell.style.right = '220px';
+            if(window.innerWidth < 700) return;
+            else {
+                this.$parent.$children[0].$children[0].$refs.mainContent.classList.add('main-content');
+                this.$refs.bell.style.right = '220px';
+            }
         },
         goToNotifications() {
             this.$inertia.get('/notifications');

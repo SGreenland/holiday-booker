@@ -24,6 +24,7 @@
     </div>
 </template>
 <script>
+
 export default {
     methods: {
         formatNotification(notification) {
@@ -47,6 +48,7 @@ export default {
             })
         }
     },
+
 };
 </script>
 <style lang="">
