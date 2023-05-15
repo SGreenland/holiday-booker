@@ -33,6 +33,9 @@ td {
     @media (max-width: 600px) {
         width: 75%;
     }
+    display: flex !important;
+    margin: auto !important;
+    justify-content: center !important;
 }
 
 .close {

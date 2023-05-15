@@ -1,24 +1,25 @@
 <template lang="">
     <div ref="mainContent" id="mainContent" class="container-fluid row m-auto h-75 main-content">
-        <calender :height="'max-content'" :disabled-dates='{ weekends: [0, 6] }' :key="calendarKey" ref="cal" :attributes="attrs" class="col h-100 p-3 me-4"></calender>
+        <calender :height="'max-content'" :disabled-dates='{ weekends: [0, 6] }' :key="calendarKey" ref="cal" :attributes="attrs" class="col h-90 p-3 me-4"></calender>
         <div class="row col-12 justify-content-evenly pt-2">
-            <div class="col-lg-3 col-sm-12">
+            <div class="col-lg-3 col-sm-12 p-2">
                 <b>Change my Color:</b>
                 <select v-model="myColor" @change="changeColor">
                     <option v-for="color in colorOptions">{{ color }}</option>
                 </select>
             </div>
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-lg-3 col-sm-12 p-2">
                     <b>Filter by Team:</b>
                     <b-select v-model="selectedTeam" :options="teamOptions">
                     </b-select>
                 </div>
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-lg-3 col-sm-12 p-2">
                     <b>Filter by Status:</b>
                     <b-select v-model="selectedStatus" :options="statusOptions">
                     </b-select>
                 </div>
         </div>
+        <div class="row m-auto justify-content-center w-100 p-3"><button class="col-lg-4 col-sm-10 myBtn" @click="resetFilters">Reset Filters</button></div>
     </div>
 </template>
 <script>
@@ -30,11 +31,11 @@ export default {
     return {
       holidays: null,
       attrs: [],
-      filter: {
-        myHoliday: false,
-        pending: false,
-        approved: false,
-      },
+    //   filter: {
+    //     myHoliday: false,
+    //     pending: false,
+    //     approved: false,
+    //   },
       calendarKey: 1,
       myColor: 'pink',
       colorOptions: ['pink', 'green', 'blue',  'yellow', 'orange', 'teal', 'purple'],
@@ -121,10 +122,20 @@ export default {
         return "pink";
       }
     },
+
+    resetFilters() {
+        this.holidays = this.allHoliday;
+        this.selectedStatus = null;
+        this.selectedTeam = null;
+        this.$nextTick(() => {
+             this.setCalendar();
+        })
+    }
   },
   watch: {
     selectedTeam() {
-        if(this.selectedStatus){
+        if(!this.selectedStatus && !this.selectedTeam) return;
+        else if(this.selectedStatus){
             this.holidays = this.allHoliday.filter(hol => hol.team == this.selectedTeam && hol.status == this.selectedStatus);
         }
         else {
@@ -134,10 +145,10 @@ export default {
         this.$nextTick(() => {
              this.setCalendar();
         })
-
     },
     selectedStatus() {
-        if(this.selectedTeam){
+        if(!this.selectedStatus && !this.selectedTeam) return;
+        else if(this.selectedTeam){
             this.holidays = this.allHoliday.filter(hol => hol.team == this.selectedTeam && hol.status == this.selectedStatus);
         }
         else {

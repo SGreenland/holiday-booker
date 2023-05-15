@@ -14497,6 +14497,9 @@ td {
 
 .tableBtn {
   width: 40%;
+  display: flex !important;
+  margin: auto !important;
+  justify-content: center !important;
 }
 @media (max-width: 600px) {
   .tableBtn {
@@ -14526,6 +14529,10 @@ td {
 
 .vh-75 {
   height: 75vh !important;
+}
+
+.h-90 {
+  height: 90% !important;
 }
 
 .bell-badge {

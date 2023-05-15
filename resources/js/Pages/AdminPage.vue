@@ -71,27 +71,29 @@
                     <td class="">{{ request.holiday.end_date }}</td>
                     <td class="">{{ request.holiday.total_days }}</td>
                     <td class="text-center">
-                       <button
-                            class="btn btn-danger m-1 tableBtn"
-                            :id="'reject-cancel' + request.id"
-                            @click="rejectCancellation(request.id)"
-                        >
-                            <b-icon icon="clipboard-x"></b-icon>
-                        </button>
-                        <b-tooltip placement="top" triggers="hover" :target="'reject-cancel' + request.id">
-                                Decline request
-                         </b-tooltip>
-                         <button
-                            class="btn btn-success m-1 tableBtn"
-                            :id="'approve-cancel' + request.id"
-                            @click="approveCancellation(request.id)"
-                            data-bs-target="#exampleModalCenter"
-                        >
-                            <b-icon icon="clipboard-check"></b-icon></button
-                        >
-                         <b-tooltip placement="top" triggers="hover" :target="'approve-cancel' + request.id">
-                                Approve request
-                         </b-tooltip>
+                       <div class="d-flex">
+                           <button
+                                class="btn btn-danger m-1 tableBtn"
+                                :id="'reject-cancel' + request.id"
+                                @click="rejectCancellation(request.id)"
+                            >
+                                <b-icon icon="clipboard-x"></b-icon>
+                            </button>
+                            <b-tooltip placement="top" triggers="hover" :target="'reject-cancel' + request.id">
+                                    Decline request
+                             </b-tooltip>
+                             <button
+                                class="btn btn-success m-1 tableBtn"
+                                :id="'approve-cancel' + request.id"
+                                @click="approveCancellation(request.id)"
+                                data-bs-target="#exampleModalCenter"
+                            >
+                                <b-icon icon="clipboard-check"></b-icon></button
+                            >
+                             <b-tooltip placement="top" triggers="hover" :target="'approve-cancel' + request.id">
+                                    Approve request
+                             </b-tooltip>
+                       </div>
                     </td>
                 </tr>
             </table>
