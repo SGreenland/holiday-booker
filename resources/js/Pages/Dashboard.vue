@@ -150,6 +150,12 @@ export default {
               fillMode: "outline",
             }),
           },})})
+
+          if(window.innerWidth < 700) {
+            //format for mobile
+            this.$refs.mainContent.classList.remove('main-content');
+            this.$parent.$refs.bell.style.right = '90px';
+          }
     },
 
     computed: {

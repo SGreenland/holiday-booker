@@ -137,16 +137,7 @@ export default {
             return this.$page.props.pathname;
         }
     },
-    mounted() {
-        //leaves menu open for desktop and closed for mobile
-        if(window.innerWidth < 700){
-            this.$refs.offcanvas.classList.remove('show');
-            Array.from(document.getElementsByClassName('navLink')).forEach(link => {
-                link.setAttribute('data-bs-dismiss', 'offcanvas')
-            })
-            this.expandContent();
-        }
-    },
+
     methods: {
         expandContent() {
             //apparently naughty...

@@ -35,7 +35,9 @@
                 </div>
                 <div class="mb-3 form-check">
                     <input
+                        v-model="form.remember"
                         type="checkbox"
+                        name="remember"
                         class="form-check-input"
                         id="exampleCheck1"
                     />
@@ -59,8 +61,21 @@ export default {
             form: {
                 email: null,
                 password: null,
+                remember: null,
             },
         };
+    },
+
+    mounted() {
+        //mobile layout
+         if(window.innerWidth < 700){
+                this.$nextTick(() => {
+                    this.$parent.$refs.offcanvas.classList.remove('show');
+                    Array.from(document.getElementsByClassName('navLink')).forEach(link => {
+                        link.setAttribute('data-bs-dismiss', 'offcanvas')
+                    })
+                })
+            }
     },
 
     methods: {

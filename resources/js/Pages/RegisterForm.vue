@@ -101,6 +101,18 @@ export default {
         };
     },
 
+     mounted() {
+        //mobile layout
+         if(window.innerWidth < 700){
+                this.$nextTick(() => {
+                    this.$parent.$refs.offcanvas.classList.remove('show');
+                    Array.from(document.getElementsByClassName('navLink')).forEach(link => {
+                        link.setAttribute('data-bs-dismiss', 'offcanvas')
+                    })
+                })
+            }
+    },
+
     methods: {
         submit() {
             this.$inertia.post("/register", this.form);

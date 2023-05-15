@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Auth;
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -36,6 +38,14 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+
+        Fortify::authenticateUsing(function (Request $request) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+                $user = User::where('email', $request->email)->first();
+                return $user;
+            }
+        });
+
 
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;
